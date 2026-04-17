@@ -3,34 +3,34 @@ import { INVALID_MOVE } from 'boardgame.io/core';
 
 const connections = {
   // Histórico
-  'N01_Centro': ['N02_Lapa', 'N03_Saude', 'N05_GloriaBotafogo', 'N31_CentroNit'], 
-  'N02_Lapa': ['N01_Centro', 'N03_Saude', 'N04_RioComprido', 'N05_GloriaBotafogo'], 
-  'N03_Saude': ['N01_Centro', 'N02_Lapa', 'N04_RioComprido', 'N10_SaoCristovao'], 
-  'N04_RioComprido': ['N02_Lapa', 'N03_Saude', 'N09_GrandeTijuca', 'N10_SaoCristovao'], 
-  
+  'N01_Centro': ['N02_Lapa', 'N03_Saude', 'N05_GloriaBotafogo', 'N31_CentroNit'],
+  'N02_Lapa': ['N01_Centro', 'N03_Saude', 'N04_RioComprido', 'N05_GloriaBotafogo'],
+  'N03_Saude': ['N01_Centro', 'N02_Lapa', 'N04_RioComprido', 'N10_SaoCristovao'],
+  'N04_RioComprido': ['N02_Lapa', 'N03_Saude', 'N09_GrandeTijuca', 'N10_SaoCristovao'],
+
   // Zona Sul
-  'N05_GloriaBotafogo': ['N01_Centro', 'N02_Lapa', 'N06_Copacabana'], 
-  'N06_Copacabana': ['N05_GloriaBotafogo', 'N07_IpanemaLeblon'], 
-  'N07_IpanemaLeblon': ['N06_Copacabana', 'N08_RocinhaGavea'], 
+  'N05_GloriaBotafogo': ['N01_Centro', 'N02_Lapa', 'N06_Copacabana'],
+  'N06_Copacabana': ['N05_GloriaBotafogo', 'N07_IpanemaLeblon'],
+  'N07_IpanemaLeblon': ['N06_Copacabana', 'N08_RocinhaGavea'],
   'N08_RocinhaGavea': ['N07_IpanemaLeblon', 'N16_BarraTijuca'],
-  
+
   // Zona Norte
   'N09_GrandeTijuca': ['N04_RioComprido', 'N10_SaoCristovao', 'N12_GrandeMeier'],
   'N10_SaoCristovao': ['N03_Saude', 'N04_RioComprido', 'N09_GrandeTijuca', 'N11_ComplexoAlemao', 'N12_GrandeMeier'],
   'N11_ComplexoAlemao': ['N10_SaoCristovao', 'N12_GrandeMeier', 'N13_Madureira', 'N14_Pavuna', 'N15_IlhaGovernador'],
   'N12_GrandeMeier': ['N09_GrandeTijuca', 'N10_SaoCristovao', 'N11_ComplexoAlemao', 'N13_Madureira'],
-  'N13_Madureira': ['N11_ComplexoAlemao', 'N12_GrandeMeier', 'N14_Pavuna', 'N17_Jacarepagua', 'N18_Bangu'], 
-  'N14_Pavuna': ['N11_ComplexoAlemao', 'N13_Madureira', 'N18_Bangu', 'N22_DuqueCaxias', 'N23_SaoJoaoMeriti', 'N24_Nilopolis'], 
+  'N13_Madureira': ['N11_ComplexoAlemao', 'N12_GrandeMeier', 'N14_Pavuna', 'N17_Jacarepagua', 'N18_Bangu'],
+  'N14_Pavuna': ['N11_ComplexoAlemao', 'N13_Madureira', 'N18_Bangu', 'N22_DuqueCaxias', 'N23_SaoJoaoMeriti', 'N24_Nilopolis'],
   'N15_IlhaGovernador': ['N11_ComplexoAlemao', 'N22_DuqueCaxias'],
-  
+
   // Zona Oeste
   'N16_BarraTijuca': ['N08_RocinhaGavea', 'N17_Jacarepagua', 'N21_Guaratiba'],
-  'N17_Jacarepagua': ['N13_Madureira', 'N16_BarraTijuca', 'N18_Bangu'], 
-  'N18_Bangu': ['N13_Madureira', 'N14_Pavuna', 'N17_Jacarepagua', 'N19_CampoGrande'], 
-  'N19_CampoGrande': ['N18_Bangu', 'N20_SantaCruz', 'N21_Guaratiba', 'N27_NovaIguacu'], 
-  'N20_SantaCruz': ['N19_CampoGrande', 'N21_Guaratiba', 'N29_Japeri'], 
+  'N17_Jacarepagua': ['N13_Madureira', 'N16_BarraTijuca', 'N18_Bangu'],
+  'N18_Bangu': ['N13_Madureira', 'N14_Pavuna', 'N17_Jacarepagua', 'N19_CampoGrande'],
+  'N19_CampoGrande': ['N18_Bangu', 'N20_SantaCruz', 'N21_Guaratiba', 'N27_NovaIguacu'],
+  'N20_SantaCruz': ['N19_CampoGrande', 'N21_Guaratiba', 'N29_Japeri'],
   'N21_Guaratiba': ['N16_BarraTijuca', 'N19_CampoGrande', 'N20_SantaCruz'],
-  
+
   // Baixada Fluminense
   'N22_DuqueCaxias': ['N23_SaoJoaoMeriti', 'N26_BelfordRoxo', 'N30_Mage', 'N15_IlhaGovernador', 'N14_Pavuna'],
   'N23_SaoJoaoMeriti': ['N22_DuqueCaxias', 'N24_Nilopolis', 'N26_BelfordRoxo', 'N14_Pavuna'],
@@ -40,21 +40,21 @@ const connections = {
   'N27_NovaIguacu': ['N25_Mesquita', 'N26_BelfordRoxo', 'N28_Queimados', 'N19_CampoGrande'],
   'N28_Queimados': ['N27_NovaIguacu', 'N29_Japeri'],
   'N29_Japeri': ['N27_NovaIguacu', 'N28_Queimados', 'N20_SantaCruz'],
-  'N30_Mage': ['N22_DuqueCaxias', 'N42_Guaxindiba'], 
-  
+  'N30_Mage': ['N22_DuqueCaxias', 'N42_Guaxindiba'],
+
   // Leste Fluminense 
-  'N31_CentroNit': ['N32_Icarai', 'N35_Fonseca', 'N01_Centro', 'N36_Engenhoca'], 
+  'N31_CentroNit': ['N32_Icarai', 'N35_Fonseca', 'N01_Centro', 'N36_Engenhoca'],
   'N32_Icarai': ['N31_CentroNit', 'N33_RegiaoOceanica', 'N34_Pendotiba', 'N36_Engenhoca'],
   'N33_RegiaoOceanica': ['N32_Icarai', 'N34_Pendotiba'],
-  'N34_Pendotiba': ['N32_Icarai', 'N33_RegiaoOceanica', 'N36_Engenhoca', 'N37_Neves', 'N38_ZeGaroto'], 
+  'N34_Pendotiba': ['N32_Icarai', 'N33_RegiaoOceanica', 'N36_Engenhoca', 'N37_Neves', 'N38_ZeGaroto'],
   'N35_Fonseca': ['N31_CentroNit', 'N36_Engenhoca', 'N37_Neves'],
   'N36_Engenhoca': ['N31_CentroNit', 'N32_Icarai', 'N34_Pendotiba', 'N35_Fonseca', 'N37_Neves'],
-  'N37_Neves': ['N34_Pendotiba', 'N35_Fonseca', 'N36_Engenhoca', 'N38_ZeGaroto'], 
+  'N37_Neves': ['N34_Pendotiba', 'N35_Fonseca', 'N36_Engenhoca', 'N38_ZeGaroto'],
   'N38_ZeGaroto': ['N34_Pendotiba', 'N37_Neves', 'N39_Mutua'],
-  'N39_Mutua': ['N38_ZeGaroto', 'N40_Alcantara', 'N41_JardimCatarina'], 
+  'N39_Mutua': ['N38_ZeGaroto', 'N40_Alcantara', 'N41_JardimCatarina'],
   'N40_Alcantara': ['N39_Mutua', 'N41_JardimCatarina', 'N42_Guaxindiba'],
   'N41_JardimCatarina': ['N39_Mutua', 'N40_Alcantara', 'N42_Guaxindiba'],
-  'N42_Guaxindiba': ['N40_Alcantara', 'N41_JardimCatarina', 'N30_Mage'] 
+  'N42_Guaxindiba': ['N40_Alcantara', 'N41_JardimCatarina', 'N30_Mage']
 };
 
 export const territoryNames = {
@@ -75,42 +75,45 @@ export const territoryNames = {
 
 const customTurnOrder = {
   first: ({ G }) => G.playOrder[0],
-  next: ({ G, ctx }) => G.playOrder[(ctx.playOrderPos + 1) % G.playOrder.length],
+  next: ({ G, ctx }) => {
+    const currentIndex = G.playOrder.indexOf(ctx.currentPlayer);
+    return G.playOrder[(currentIndex + 1) % G.playOrder.length];
+  },
   playOrder: ({ G }) => G.playOrder,
 };
 
 export const WarRio = {
   name: 'war-metropole-fluminense',
-  
+
   setup: ({ random }) => {
     const tKeys = Object.keys(connections);
     const shuffledTerritories = random.Shuffle(tKeys);
     let initialTerritories = {};
-    
+
     shuffledTerritories.forEach((id, index) => {
       initialTerritories[id] = { owner: (index % 4).toString(), armies: 1 };
     });
 
     const playerIDs = ['0', '1', '2', '3'];
     let objectives = [
-        {id: 'OB_01', type: 'continent', continent: 'Historico'}, {id: 'OB_02', type: 'continent', continent: 'ZonaSul'},
-        {id: 'OB_ZN', type: 'continent', continent: 'ZonaNorte'}, {id: 'OB_ZO', type: 'continent', continent: 'ZonaOeste'},
-        {id: 'OB_BX', type: 'continent', continent: 'Baixada'}, {id: 'OB_LS', type: 'continent', continent: 'Leste'},
-        {id: 'OB_D_0', type: 'destroy', target: '0'}, {id: 'OB_D_1', type: 'destroy', target: '1'},
-        {id: 'OB_D_2', type: 'destroy', target: '2'}, {id: 'OB_D_3', type: 'destroy', target: '3'}
+      { id: 'OB_01', type: 'continent', continent: 'Historico' }, { id: 'OB_02', type: 'continent', continent: 'ZonaSul' },
+      { id: 'OB_ZN', type: 'continent', continent: 'ZonaNorte' }, { id: 'OB_ZO', type: 'continent', continent: 'ZonaOeste' },
+      { id: 'OB_BX', type: 'continent', continent: 'Baixada' }, { id: 'OB_LS', type: 'continent', continent: 'Leste' },
+      { id: 'OB_D_0', type: 'destroy', target: '0' }, { id: 'OB_D_1', type: 'destroy', target: '1' },
+      { id: 'OB_D_2', type: 'destroy', target: '2' }, { id: 'OB_D_3', type: 'destroy', target: '3' }
     ];
-    
+
     let assignments = {};
     let valid = false;
-    while(!valid) {
+    while (!valid) {
       objectives = random.Shuffle(objectives);
       valid = true;
       assignments = {};
-      for(let i=0; i<playerIDs.length; i++) {
+      for (let i = 0; i < playerIDs.length; i++) {
         const pId = playerIDs[i];
         const obj = objectives[i];
-        if(obj.type === 'destroy' && obj.target === pId) {
-          valid = false; break; 
+        if (obj.type === 'destroy' && obj.target === pId) {
+          valid = false; break;
         }
         assignments[pId] = obj;
       }
@@ -127,7 +130,7 @@ export const WarRio = {
     return {
       playOrder: random.Shuffle(['0', '1', '2', '3']),
       territories: initialTerritories,
-      connections, 
+      connections,
       continents: {
         'Historico': { name: 'Núcleo Histórico', territories: ['N01_Centro', 'N02_Lapa', 'N03_Saude', 'N04_RioComprido'], bonus: 2 },
         'ZonaSul': { name: 'Zona Sul', territories: ['N05_GloriaBotafogo', 'N06_Copacabana', 'N07_IpanemaLeblon', 'N08_RocinhaGavea'], bonus: 2 },
@@ -145,13 +148,13 @@ export const WarRio = {
         { id: 'Coringa', shape: 'Coringa' }, { id: 'Coringa2', shape: 'Coringa' }
       ],
       players: {
-        '0': { faction: shuffledFactions[0].faction, color: shuffledFactions[0].color, cards: [], conqueredThisTurn: false, eliminated: false, objective: assignments['0'] },   
-        '1': { faction: shuffledFactions[1].faction, color: shuffledFactions[1].color, cards: [], conqueredThisTurn: false, eliminated: false, objective: assignments['1'] },
-        '2': { faction: shuffledFactions[2].faction, color: shuffledFactions[2].color, cards: [], conqueredThisTurn: false, eliminated: false, objective: assignments['2'] },
-        '3': { faction: shuffledFactions[3].faction, color: shuffledFactions[3].color, cards: [], conqueredThisTurn: false, eliminated: false, objective: assignments['3'] }
+        '0': { faction: shuffledFactions[0].faction, color: shuffledFactions[0].color, cards: [], conqueredThisTurn: false, eliminated: false, initialReinforcementDone: false, objective: assignments['0'] },
+        '1': { faction: shuffledFactions[1].faction, color: shuffledFactions[1].color, cards: [], conqueredThisTurn: false, eliminated: false, initialReinforcementDone: false, objective: assignments['1'] },
+        '2': { faction: shuffledFactions[2].faction, color: shuffledFactions[2].color, cards: [], conqueredThisTurn: false, eliminated: false, initialReinforcementDone: false, objective: assignments['2'] },
+        '3': { faction: shuffledFactions[3].faction, color: shuffledFactions[3].color, cards: [], conqueredThisTurn: false, eliminated: false, initialReinforcementDone: false, objective: assignments['3'] }
       },
-      troopsToPlace: 0, 
-      tradeCount: 0, 
+      troopsToPlace: 0,
+      tradeCount: 0,
       lastCombat: null,
       pendingOccupation: null,
       log: [{ faction: 'SISTEMA', color: '#ffdd55', msg: 'As comunicações foram estabelecidas. A guerra começou!' }]
@@ -171,8 +174,11 @@ export const WarRio = {
             const ownsAll = continent.territories.every(tId => G.territories[tId].owner === ctx.currentPlayer);
             if (ownsAll) G.troopsToPlace += continent.bonus;
           });
+          G.players[ctx.currentPlayer].initialReinforcementDone = false;
         },
-        // Proteção extra caso aconteça o impossível nesta fase
+        onEnd: ({ G, ctx }) => {
+          G.players[ctx.currentPlayer].initialReinforcementDone = true;
+        },
         endIf: ({ G, ctx }) => G.players[ctx.currentPlayer]?.eliminated === true,
         activePlayers: { currentPlayer: 'reinforcement' },
         stages: {
@@ -182,13 +188,16 @@ export const WarRio = {
                 if (G.territories[territoryId].owner !== ctx.currentPlayer) return INVALID_MOVE;
                 if (G.troopsToPlace <= 0) return INVALID_MOVE;
                 G.territories[territoryId].armies += 1;
-                G.troopsToPlace -= 1; 
+                G.troopsToPlace -= 1;
               }
             }
           }
         }
       },
-      endIf: ({ ctx }) => ctx.turn > 4, 
+      endIf: ({ G }) => {
+        const allPlaced = Object.values(G.players).every(p => p.initialReinforcementDone);
+        return allPlaced;
+      },
     },
 
     main: {
@@ -196,13 +205,13 @@ export const WarRio = {
         order: customTurnOrder,
         onBegin: ({ G, ctx }) => {
           const ownedTerritories = Object.values(G.territories).filter(t => t.owner === ctx.currentPlayer).length;
-          
+
           // Verificação vital de Eliminação - Limpa o lixo residual para não quebrar a UI
           if (ownedTerritories === 0 || G.players[ctx.currentPlayer].eliminated) {
             G.players[ctx.currentPlayer].eliminated = true;
             G.troopsToPlace = 0;
-            G.pendingOccupation = null; 
-            return; 
+            G.pendingOccupation = null;
+            return;
           }
 
           G.troopsToPlace = Math.max(3, Math.floor(ownedTerritories / 2));
@@ -219,13 +228,13 @@ export const WarRio = {
             player.cards.push(drawnCard);
           }
           player.conqueredThisTurn = false;
-          G.lastCombat = null; 
+          G.lastCombat = null;
           G.pendingOccupation = null;
         },
         // Pula silenciosamente e de forma automática o turno de generais eliminados
         endIf: ({ G, ctx }) => G.players[ctx.currentPlayer]?.eliminated === true,
         activePlayers: { currentPlayer: 'reinforcement' },
-        
+
         stages: {
           reinforcement: {
             moves: {
@@ -233,7 +242,7 @@ export const WarRio = {
                 if (G.territories[territoryId].owner !== ctx.currentPlayer) return INVALID_MOVE;
                 if (G.troopsToPlace <= 0) return INVALID_MOVE;
                 G.territories[territoryId].armies += 1;
-                G.troopsToPlace -= 1; 
+                G.troopsToPlace -= 1;
               },
               exchangeCards: ({ G, ctx }, cardIndices) => {
                 const player = G.players[ctx.currentPlayer];
@@ -242,7 +251,7 @@ export const WarRio = {
                 const shapes = cardsToTrade.map(c => c.shape);
                 const hasCoringa = shapes.includes('Coringa');
                 const uniqueShapes = new Set(shapes.filter(s => s !== 'Coringa')).size;
-                if (!(hasCoringa || uniqueShapes === 1 || uniqueShapes === 3)) return INVALID_MOVE; 
+                if (!(hasCoringa || uniqueShapes === 1 || uniqueShapes === 3)) return INVALID_MOVE;
 
                 const tradeValues = [4, 6, 8, 10, 12, 15];
                 let armiesReceived = G.tradeCount < 6 ? tradeValues[G.tradeCount] : 15 + ((G.tradeCount - 5) * 5);
@@ -265,7 +274,7 @@ export const WarRio = {
           attack: {
             moves: {
               declareAttack: ({ G, ctx, random }, sourceId, targetId) => {
-                if (G.pendingOccupation) return INVALID_MOVE; 
+                if (G.pendingOccupation) return INVALID_MOVE;
 
                 const source = G.territories[sourceId];
                 const target = G.territories[targetId];
@@ -275,13 +284,13 @@ export const WarRio = {
                 const attackDiceCount = Math.min(3, source.armies - 1);
                 const defenseDiceCount = Math.min(3, target.armies);
 
-                let attackRolls = []; for(let i=0; i<attackDiceCount; i++) attackRolls.push(random.D6()); attackRolls.sort((a,b)=>b-a);
-                let defenseRolls = []; for(let i=0; i<defenseDiceCount; i++) defenseRolls.push(random.D6()); defenseRolls.sort((a,b)=>b-a);
+                let attackRolls = []; for (let i = 0; i < attackDiceCount; i++) attackRolls.push(random.D6()); attackRolls.sort((a, b) => b - a);
+                let defenseRolls = []; for (let i = 0; i < defenseDiceCount; i++) defenseRolls.push(random.D6()); defenseRolls.sort((a, b) => b - a);
 
                 let attackerLosses = 0; let defenderLosses = 0;
                 const comparisons = Math.min(attackDiceCount, defenseDiceCount);
                 for (let i = 0; i < comparisons; i++) {
-                  if (attackRolls[i] > defenseRolls[i]) defenderLosses++; else attackerLosses++; 
+                  if (attackRolls[i] > defenseRolls[i]) defenderLosses++; else attackerLosses++;
                 }
 
                 source.armies -= attackerLosses;
@@ -290,16 +299,16 @@ export const WarRio = {
                 const originalTargetOwner = target.owner;
                 let conquered = false;
 
-                if (target.armies <= 0) { 
-                  conquered = true; 
+                if (target.armies <= 0) {
+                  conquered = true;
                   target.owner = ctx.currentPlayer;
-                  target.armies = 1; 
+                  target.armies = 1;
                   source.armies -= 1;
                   G.players[ctx.currentPlayer].conqueredThisTurn = true;
 
-                  const maxExtra = Math.min(2, source.armies - 1); 
+                  const maxExtra = Math.min(2, source.armies - 1);
                   if (maxExtra > 0) {
-                     G.pendingOccupation = { sourceId, targetId, maxExtra };
+                    G.pendingOccupation = { sourceId, targetId, maxExtra };
                   }
 
                   G.log.push({
@@ -311,7 +320,7 @@ export const WarRio = {
                   const defenderTerritories = Object.values(G.territories).filter(t => t.owner === originalTargetOwner).length;
                   if (defenderTerritories === 0) {
                     G.players[originalTargetOwner].eliminated = true;
-                    
+
                     G.log.push({
                       faction: 'SISTEMA',
                       color: '#ff4444',
@@ -323,7 +332,7 @@ export const WarRio = {
                       const obj = G.players[pId].objective;
                       if (obj && obj.type === 'destroy' && obj.target === originalTargetOwner && pId !== ctx.currentPlayer) {
                         G.players[pId].objective = { id: 'OB_FALLBACK', type: 'territories', count: 6 };
-                        
+
                         G.log.push({
                           faction: 'SISTEMA',
                           color: '#ffdd55',
@@ -338,7 +347,7 @@ export const WarRio = {
               },
 
               blitzAttack: ({ G, ctx, random }, sourceId, targetId) => {
-                if (G.pendingOccupation) return INVALID_MOVE; 
+                if (G.pendingOccupation) return INVALID_MOVE;
 
                 const source = G.territories[sourceId];
                 const target = G.territories[targetId];
@@ -354,8 +363,8 @@ export const WarRio = {
                   const attackDiceCount = Math.min(3, source.armies - 1);
                   const defenseDiceCount = Math.min(3, target.armies);
 
-                  let attackRolls = []; for(let i=0; i<attackDiceCount; i++) attackRolls.push(random.D6()); attackRolls.sort((a,b)=>b-a);
-                  let defenseRolls = []; for(let i=0; i<defenseDiceCount; i++) defenseRolls.push(random.D6()); defenseRolls.sort((a,b)=>b-a);
+                  let attackRolls = []; for (let i = 0; i < attackDiceCount; i++) attackRolls.push(random.D6()); attackRolls.sort((a, b) => b - a);
+                  let defenseRolls = []; for (let i = 0; i < defenseDiceCount; i++) defenseRolls.push(random.D6()); defenseRolls.sort((a, b) => b - a);
 
                   const comparisons = Math.min(attackDiceCount, defenseDiceCount);
                   for (let i = 0; i < comparisons; i++) {
@@ -371,15 +380,15 @@ export const WarRio = {
                 let conquered = false;
 
                 if (target.armies === 0) {
-                  conquered = true; 
+                  conquered = true;
                   target.owner = ctx.currentPlayer;
-                  target.armies = 1; 
+                  target.armies = 1;
                   source.armies -= 1;
                   G.players[ctx.currentPlayer].conqueredThisTurn = true;
 
-                  const maxExtra = Math.min(2, source.armies - 1); 
+                  const maxExtra = Math.min(2, source.armies - 1);
                   if (maxExtra > 0) {
-                     G.pendingOccupation = { sourceId, targetId, maxExtra };
+                    G.pendingOccupation = { sourceId, targetId, maxExtra };
                   }
 
                   G.log.push({
@@ -423,7 +432,7 @@ export const WarRio = {
 
                 G.territories[G.pendingOccupation.sourceId].armies -= extra;
                 G.territories[G.pendingOccupation.targetId].armies += extra;
-                G.pendingOccupation = null; 
+                G.pendingOccupation = null;
               }
             }
           },
@@ -442,12 +451,12 @@ export const WarRio = {
                   const current = queue.shift();
                   if (current === targetId) { pathFound = true; break; }
                   visited.add(current);
-                  
+
                   const neighbors = G.connections[current] || [];
                   for (const neighbor of neighbors) {
                     if (G.territories[neighbor].owner === ctx.currentPlayer && !visited.has(neighbor)) {
                       queue.push(neighbor);
-                      visited.add(neighbor); 
+                      visited.add(neighbor);
                     }
                   }
                 }
@@ -463,8 +472,8 @@ export const WarRio = {
       }
     }
   },
-  
- // ============================================================================
+
+  // ============================================================================
   // CONDIÇÕES DE VITÓRIA (AVALIAÇÃO GLOBAL)
   // ============================================================================
   endIf: ({ G, ctx }) => {
@@ -488,13 +497,13 @@ export const WarRio = {
         if (continent) {
           conditionMet = continent.territories.every(tId => G.territories[tId]?.owner === playerId);
         }
-      } 
+      }
       // VERIFICAÇÃO 2: Erradicação de Facção Inimiga
       else if (objective.type === 'destroy') {
         const targetPlayer = G.players[objective.target];
         // Se o alvo foi eliminado (mesmo que por outro jogador), a vitória é confirmada!
         if (targetPlayer?.eliminated) {
-           conditionMet = true; 
+          conditionMet = true;
         }
       }
       // VERIFICAÇÃO 3: Mutação Tática (Territórios Quantitativos)
