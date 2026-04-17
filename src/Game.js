@@ -2,11 +2,11 @@
 import { INVALID_MOVE } from 'boardgame.io/core';
 
 const connections = {
-  // Histórico (ATUALIZADO: Saúde e Rio Comprido agora se conectam)
+  // Histórico
   'N01_Centro': ['N02_Lapa', 'N03_Saude', 'N05_GloriaBotafogo', 'N31_CentroNit'], 
   'N02_Lapa': ['N01_Centro', 'N03_Saude', 'N04_RioComprido', 'N05_GloriaBotafogo'], 
-  'N03_Saude': ['N01_Centro', 'N02_Lapa', 'N04_RioComprido', 'N10_SaoCristovao'], // Adicionado N04
-  'N04_RioComprido': ['N02_Lapa', 'N03_Saude', 'N09_GrandeTijuca', 'N10_SaoCristovao'], // Adicionado N03
+  'N03_Saude': ['N01_Centro', 'N02_Lapa', 'N04_RioComprido', 'N10_SaoCristovao'], 
+  'N04_RioComprido': ['N02_Lapa', 'N03_Saude', 'N09_GrandeTijuca', 'N10_SaoCristovao'], 
   
   // Zona Sul
   'N05_GloriaBotafogo': ['N01_Centro', 'N02_Lapa', 'N06_Copacabana'], 
@@ -42,14 +42,14 @@ const connections = {
   'N29_Japeri': ['N27_NovaIguacu', 'N28_Queimados', 'N20_SantaCruz'],
   'N30_Mage': ['N22_DuqueCaxias', 'N42_Guaxindiba'], 
   
-  // Leste Fluminense (ATUALIZADO: Região Oceânica com rota dupla, Pendotiba <-> Neves ativada)
+  // Leste Fluminense 
   'N31_CentroNit': ['N32_Icarai', 'N35_Fonseca', 'N01_Centro', 'N36_Engenhoca'], 
   'N32_Icarai': ['N31_CentroNit', 'N33_RegiaoOceanica', 'N34_Pendotiba', 'N36_Engenhoca'],
   'N33_RegiaoOceanica': ['N32_Icarai', 'N34_Pendotiba'],
-  'N34_Pendotiba': ['N32_Icarai', 'N33_RegiaoOceanica', 'N36_Engenhoca', 'N37_Neves', 'N38_ZeGaroto'], // Adicionado N37
+  'N34_Pendotiba': ['N32_Icarai', 'N33_RegiaoOceanica', 'N36_Engenhoca', 'N37_Neves', 'N38_ZeGaroto'], 
   'N35_Fonseca': ['N31_CentroNit', 'N36_Engenhoca', 'N37_Neves'],
   'N36_Engenhoca': ['N31_CentroNit', 'N32_Icarai', 'N34_Pendotiba', 'N35_Fonseca', 'N37_Neves'],
-  'N37_Neves': ['N34_Pendotiba', 'N35_Fonseca', 'N36_Engenhoca', 'N38_ZeGaroto'], // Adicionado N34
+  'N37_Neves': ['N34_Pendotiba', 'N35_Fonseca', 'N36_Engenhoca', 'N38_ZeGaroto'], 
   'N38_ZeGaroto': ['N34_Pendotiba', 'N37_Neves', 'N39_Mutua'],
   'N39_Mutua': ['N38_ZeGaroto', 'N40_Alcantara', 'N41_JardimCatarina'], 
   'N40_Alcantara': ['N39_Mutua', 'N41_JardimCatarina', 'N42_Guaxindiba'],
@@ -71,6 +71,12 @@ export const territoryNames = {
   'N34_Pendotiba': 'Pendotiba', 'N35_Fonseca': 'Fonseca', 'N36_Engenhoca': 'Engenhoca',
   'N37_Neves': 'Neves', 'N38_ZeGaroto': 'Zé Garoto', 'N39_Mutua': 'Mutuá',
   'N40_Alcantara': 'Alcântara', 'N41_JardimCatarina': 'Jardim Catarina', 'N42_Guaxindiba': 'Guaxindiba'
+};
+
+const customTurnOrder = {
+  first: ({ G }) => G.playOrder[0],
+  next: ({ G, ctx }) => G.playOrder[(ctx.playOrderPos + 1) % G.playOrder.length],
+  playOrder: ({ G }) => G.playOrder,
 };
 
 export const WarRio = {
@@ -110,7 +116,6 @@ export const WarRio = {
       }
     }
 
-    // A MÁGICA: Embaralhamos as facções para garantir ordem de jogo 100% aleatória!
     const baseFactions = [
       { faction: 'CV', color: '#ff3333' },
       { faction: 'TCP', color: '#33cc33' },
@@ -120,6 +125,7 @@ export const WarRio = {
     const shuffledFactions = random.Shuffle(baseFactions);
 
     return {
+      playOrder: random.Shuffle(['0', '1', '2', '3']),
       territories: initialTerritories,
       connections, 
       continents: {
@@ -138,7 +144,6 @@ export const WarRio = {
         { id: 'N31_CentroNit', shape: 'Triângulo' }, { id: 'N32_Icarai', shape: 'Quadrado' }, { id: 'N33_RegiaoOceanica', shape: 'Círculo' }, { id: 'N34_Pendotiba', shape: 'Triângulo' }, { id: 'N35_Fonseca', shape: 'Quadrado' }, { id: 'N36_Engenhoca', shape: 'Círculo' }, { id: 'N37_Neves', shape: 'Triângulo' }, { id: 'N38_ZeGaroto', shape: 'Quadrado' }, { id: 'N39_Mutua', shape: 'Círculo' }, { id: 'N40_Alcantara', shape: 'Triângulo' }, { id: 'N41_JardimCatarina', shape: 'Quadrado' }, { id: 'N42_Guaxindiba', shape: 'Círculo' },
         { id: 'Coringa', shape: 'Coringa' }, { id: 'Coringa2', shape: 'Coringa' }
       ],
-      // Os jogadores assumem as facções sorteadas
       players: {
         '0': { faction: shuffledFactions[0].faction, color: shuffledFactions[0].color, cards: [], conqueredThisTurn: false, eliminated: false, objective: assignments['0'] },   
         '1': { faction: shuffledFactions[1].faction, color: shuffledFactions[1].color, cards: [], conqueredThisTurn: false, eliminated: false, objective: assignments['1'] },
@@ -154,11 +159,11 @@ export const WarRio = {
   },
 
   phases: {
-    // FASE ZERO: O motor segue o relógio normal, mas essa fase acaba rigorosamente após os 4 passarem.
     initialReinforcement: {
       start: true,
       next: 'main',
       turn: {
+        order: customTurnOrder,
         onBegin: ({ G, ctx }) => {
           const ownedTerritories = Object.values(G.territories).filter(t => t.owner === ctx.currentPlayer).length;
           G.troopsToPlace = Math.max(3, Math.floor(ownedTerritories / 2));
@@ -167,6 +172,8 @@ export const WarRio = {
             if (ownsAll) G.troopsToPlace += continent.bonus;
           });
         },
+        // Proteção extra caso aconteça o impossível nesta fase
+        endIf: ({ G, ctx }) => G.players[ctx.currentPlayer]?.eliminated === true,
         activePlayers: { currentPlayer: 'reinforcement' },
         stages: {
           reinforcement: {
@@ -181,20 +188,23 @@ export const WarRio = {
           }
         }
       },
-      // CORREÇÃO CRUCIAL: Só avança após o 4º turno ter sido concluído por inteiro.
       endIf: ({ ctx }) => ctx.turn > 4, 
     },
 
-    // FASE DE GUERRA
     main: {
       turn: {
+        order: customTurnOrder,
         onBegin: ({ G, ctx }) => {
           const ownedTerritories = Object.values(G.territories).filter(t => t.owner === ctx.currentPlayer).length;
-          if (ownedTerritories === 0) {
+          
+          // Verificação vital de Eliminação - Limpa o lixo residual para não quebrar a UI
+          if (ownedTerritories === 0 || G.players[ctx.currentPlayer].eliminated) {
             G.players[ctx.currentPlayer].eliminated = true;
-            G.troopsToPlace = 0; 
+            G.troopsToPlace = 0;
+            G.pendingOccupation = null; 
             return; 
           }
+
           G.troopsToPlace = Math.max(3, Math.floor(ownedTerritories / 2));
           Object.values(G.continents).forEach(continent => {
             const ownsAll = continent.territories.every(tId => G.territories[tId].owner === ctx.currentPlayer);
@@ -212,6 +222,8 @@ export const WarRio = {
           G.lastCombat = null; 
           G.pendingOccupation = null;
         },
+        // Pula silenciosamente e de forma automática o turno de generais eliminados
+        endIf: ({ G, ctx }) => G.players[ctx.currentPlayer]?.eliminated === true,
         activePlayers: { currentPlayer: 'reinforcement' },
         
         stages: {
@@ -306,6 +318,7 @@ export const WarRio = {
                       msg: `💀 ALERTA: A facção ${G.players[originalTargetOwner].faction} foi ERRADICADA do jogo!`
                     });
 
+                    // Fallback do Objetivo de Destruição
                     Object.keys(G.players).forEach(pId => {
                       const obj = G.players[pId].objective;
                       if (obj && obj.type === 'destroy' && obj.target === originalTargetOwner && pId !== ctx.currentPlayer) {
@@ -451,35 +464,54 @@ export const WarRio = {
     }
   },
   
+ // ============================================================================
+  // CONDIÇÕES DE VITÓRIA (AVALIAÇÃO GLOBAL)
+  // ============================================================================
   endIf: ({ G, ctx }) => {
-    const playerId = ctx.currentPlayer;
-    const objective = G.players[playerId]?.objective;
-    if (!objective) return null;
-    
-    let conditionMet = false;
-    
-    if (objective.type === 'continent') {
-      const continent = G.continents[objective.continent];
-      if (continent) {
-        conditionMet = continent.territories.every(tId => G.territories[tId]?.owner === playerId);
+    const playerIDs = ['0', '1', '2', '3'];
+
+    // O Juiz varre a mesa jogador por jogador (garante desempate por ordem de ID)
+    for (const playerId of playerIDs) {
+      const player = G.players[playerId];
+
+      // Ignora jogadores eliminados ou que, por alguma falha, não tenham objetivo
+      if (!player || player.eliminated || !player.objective) {
+        continue;
       }
-    } 
-    else if (objective.type === 'destroy') {
-      const targetPlayer = G.players[objective.target];
-      if (targetPlayer?.eliminated) {
-         conditionMet = true; 
+
+      const objective = player.objective;
+      let conditionMet = false;
+
+      // VERIFICAÇÃO 1: Domínio Continental
+      if (objective.type === 'continent') {
+        const continent = G.continents[objective.continent];
+        if (continent) {
+          conditionMet = continent.territories.every(tId => G.territories[tId]?.owner === playerId);
+        }
+      } 
+      // VERIFICAÇÃO 2: Erradicação de Facção Inimiga
+      else if (objective.type === 'destroy') {
+        const targetPlayer = G.players[objective.target];
+        // Se o alvo foi eliminado (mesmo que por outro jogador), a vitória é confirmada!
+        if (targetPlayer?.eliminated) {
+           conditionMet = true; 
+        }
+      }
+      // VERIFICAÇÃO 3: Mutação Tática (Territórios Quantitativos)
+      else if (objective.type === 'territories') {
+        const ownedCount = Object.values(G.territories).filter(t => t.owner === playerId).length;
+        if (ownedCount >= objective.count) {
+          conditionMet = true;
+        }
+      }
+
+      // Declara o Vencedor imediatamente ao achar o primeiro que cumpriu a meta
+      if (conditionMet) {
+        return { winner: playerId };
       }
     }
-    else if (objective.type === 'territories') {
-      const ownedCount = Object.values(G.territories).filter(t => t.owner === playerId).length;
-      if (ownedCount >= objective.count) {
-        conditionMet = true;
-      }
-    }
-    
-    if (conditionMet) {
-      return { winner: playerId };
-    }
+
+    // A guerra continua...
     return null;
   }
-};
+}; // Fim do objeto WarRio
